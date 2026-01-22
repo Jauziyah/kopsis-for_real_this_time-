@@ -34,6 +34,10 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'admin_toko' => \App\Filters\AdminTokoFilter::class,
+        'pelanggan' => \App\Filters\PelangganFilter::class,
+        'owner' => \App\Filters\OwnerFilter::class
+
     ];
 
     /**
