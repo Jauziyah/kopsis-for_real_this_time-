@@ -19,12 +19,16 @@ $routes->post('register', 'RegisterAdd::registerAction' ,['as' => 'register.acti
 
 
 // Admin Toko
-$routes->group('admin', ['filter' => 'admin_toko'], function($routes){
-    $routes->get('/', 'AdminDisplayPage::index', ['as' => 'admin.product_view']);
+$routes->group('admin_toko', ['filter' => 'admin_toko'], function($routes){
+    $routes->get('/', 'AdminTokoDisplayPage::index', ['as' => 'admin_toko.product_view']);
 });
+
+// owner
 $routes->group('owner', ['filter' => 'owner'], function($routes){
     $routes->get('/', 'OwnerDisplayPage::index', ['as' => 'owner.product_view']);
 });
+
+// Pelanggan
 $routes->group('pelanggan', ['filter' => 'pelanggan'], function($routes){
     $routes->get('/', 'PelangganDisplayPage::index', ['as' => 'pelanggan.main_view']);
 });
