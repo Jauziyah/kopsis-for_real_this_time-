@@ -2,6 +2,8 @@
 
 <?= $this->section('admin_content');;?>
 
-<h1>Etwas</h1>
+<h1>List Produk</h1>
+
+
 
 <?= $this->endSection();;?>

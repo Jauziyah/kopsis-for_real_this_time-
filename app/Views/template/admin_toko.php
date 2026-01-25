@@ -14,8 +14,8 @@
         class="nav justify-content-start align-content-center py-2 px-3 bg-secondary"
     >
 
-    <h4><a href="<?php redirect()->to('admin_toko.product');;?>" class="nav-link text-white">Product</a></h4>
-    <h4><a href="" class="nav-link text-white">Etwas</a></h4>
+    <h4><a href="<?= route_to('admin_toko.product_view') ?>" class="nav-link text-white">Product</a></h4>
+    <h4><a href="<?= route_to('admin_toko.kategori_view') ?>" class="nav-link text-white">Kategori</a></h4>
     <h4><a href="" class="nav-link text-white">Etwas</a></h4>
     </nav>
     

@@ -20,7 +20,18 @@ $routes->post('register', 'RegisterAdd::registerAction' ,['as' => 'register.acti
 
 // Admin Toko
 $routes->group('admin_toko', ['filter' => 'admin_toko'], function($routes){
-    $routes->get('/', 'AdminTokoDisplayPage::index', ['as' => 'admin_toko.product_view']);
+    $routes->get('/', 'AdminTokoDisplayPage::index', ['as' => 'admin_toko.product_view']); 
+
+    $routes->post('kategori/(:num)', 'AdminKategori_crudv::delete/$1', ['as' => 'admin_toko.kategori_delete']);
+
+    $routes->get('kategori', 'AdminKategori_crudv::index', ['as' => 'admin_toko.kategori_view']); 
+    $routes->get('kategori/add' , 'AdminKategori_crudv::addView', ['as' => 'admin_toko.kategori_view_add']);
+
+    $routes->get('kategori/update/(:num)', 'AdminKategori_crudv::updateView/$1', ['as' => 'admin_toko.kategori_update_view']);
+    $routes->post('kategori-update/(:num)', 'AdminKategori_crudv::update/$1', ['as' => 'admin_toko.kategori_update']);
+
+    $routes->post('add-kategori' , 'AdminKategori_crudv::save', ['as' => 'admin_toko.kategori_add']);
+
 });
 
 // owner
