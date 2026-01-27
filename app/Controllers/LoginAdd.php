@@ -20,9 +20,9 @@ public function loginAction(): RedirectResponse
         $user = auth()->user();
 
         if($user->inGroup('owner')){
-            redirect()->route('owner.product_view');
+            redirect()->route('owner.barang_view');
         } elseif($user->inGroup('admin_toko')){
-            redirect()->route('admin_toko.product_view');
+            redirect()->route('admin_toko.barang_view');
         } elseif($user->inGroup('pelanggan')){
             redirect()->route('pelanggan.main_view');
         }

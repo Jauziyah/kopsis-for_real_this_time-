@@ -57,6 +57,12 @@ class AdminKategori_crudv extends BaseController
         return redirect()->route('admin_toko.kategori_view');
     }
 
+    public function test()
+    {
+        session()->setFlashdata('pesan', 'kategori berhasil ditambahkan');
+        return redirect()->route('admin_toko.kategori_view');
+    }
+
     public function delete($id)
     {
         $this->kategori_model->delete($id);

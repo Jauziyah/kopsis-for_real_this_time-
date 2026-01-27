@@ -19,21 +19,23 @@ $routes->post('register', 'RegisterAdd::registerAction' ,['as' => 'register.acti
 
 
 // Admin Toko
-$routes->group('admin_toko', ['filter' => 'admin_toko'], function($routes){
-    $routes->get('/', 'AdminTokoDisplayPage::index', ['as' => 'admin_toko.product_view']); 
+$routes->group('admin_toko', ['filter' => 'admin_toko'], function($routes){ 
 
-    $routes->post('kategori/(:num)', 'AdminKategori_crudv::delete/$1', ['as' => 'admin_toko.kategori_delete']);
+    // -------------------barang Seiks90j --------------------------------
+    $routes->get('barang', 'AdminBarang_crudv::index', ['as' => 'admin_toko.barang_view']); 
+    $routes->get('barang/create', 'AdminBarang_crudv::createView', ['as' => 'admin_toko.barang_create_view']);
+    $routes->post('barang-create', 'AdminBarang_crudv::createBarang', ['as' => 'admin_toko.barang_create']);
 
-    $routes->get('kategori', 'AdminKategori_crudv::index', ['as' => 'admin_toko.kategori_view']); 
-    $routes->get('kategori/add' , 'AdminKategori_crudv::addView', ['as' => 'admin_toko.kategori_view_add']);
+    // -------------------Kategori Seiks90j --------------------------------
+    $routes->post('kategori/(:num)', 'AdminKategori_crudv::delete/$1', ['as' => 'admin_toko.kategori_delete']); // delete
+    $routes->get('kategori', 'AdminKategori_crudv::index', ['as' => 'admin_toko.kategori_view']); //kategori page
+    $routes->get('kategori/add' , 'AdminKategori_crudv::addView', ['as' => 'admin_toko.kategori_view_add']); //add kategori page
+    $routes->post('add-kategori' , 'AdminKategori_crudv::save', ['as' => 'admin_toko.kategori_add']); //Add Kategori method
+    $routes->get('kategori/update/(:num)', 'AdminKategori_crudv::updateView/$1', ['as' => 'admin_toko.kategori_update_view']);  // kategori update page
+    $routes->post('kategori-update/(:num)', 'AdminKategori_crudv::update/$1', ['as' => 'admin_toko.kategori_update']); // kategori update method
 
-    $routes->get('kategori/update/(:num)', 'AdminKategori_crudv::updateView/$1', ['as' => 'admin_toko.kategori_update_view']);
-    $routes->post('kategori-update/(:num)', 'AdminKategori_crudv::update/$1', ['as' => 'admin_toko.kategori_update']);
-
-    $routes->post('add-kategori' , 'AdminKategori_crudv::save', ['as' => 'admin_toko.kategori_add']);
 
 });
-
 // owner
 $routes->group('owner', ['filter' => 'owner'], function($routes){
     $routes->get('/', 'OwnerDisplayPage::index', ['as' => 'owner.product_view']);
