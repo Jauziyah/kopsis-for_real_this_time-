@@ -12,4 +12,9 @@ class BarangImageModel extends Model
     // Dates
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+    public function findBarangImage($kode_barang)
+    {
+        return $this->where('barang_kode_barang', $kode_barang)->findAll();
+    }
+
 }

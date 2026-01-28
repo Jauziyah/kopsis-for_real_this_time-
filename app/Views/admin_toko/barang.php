@@ -29,6 +29,7 @@
                 <th scope="col">Harga Barang</th>
                 <th scope="col">Stok Barang</th>
                 <th scope="col">Status Ketersediaan</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,17 @@
                 <td><?= $barang['harga_barang'];?></td>
                 <td><?= $barang['stok_barang'];?></td>
                 <td><?= $barang['status_ketersediaan'];?></td>
+
+                <td>
+                    
+                    <form action="<?= route_to('admin_toko.barang_delete', $barang['kode_barang']);?>" method="post">
+                        <?= csrf_field() ?>
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+
+                    <button class="btn btn-warning" type="submit">Soft Delete</button>
+                </td>
+
                 </tr>
             <?php endforeach ?>
         </tbody>

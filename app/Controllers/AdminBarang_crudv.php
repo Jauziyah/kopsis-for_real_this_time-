@@ -100,7 +100,26 @@ class AdminBarang_crudv extends BaseController
         return redirect()->route('admin_toko.barang_view');
     }
 
-    public function updateBarang() {}
+    public function updateBarang()
+    {
+    }
+
+    public function deleteBarang($kode_barang)
+    {
+        $produk_images = $this->barang_image_model->findBarangImage($kode_barang);
+        foreach($produk_images as $images){
+            $filepath = 'uploads/'. $images['nama_image'];
+            if(file_exists($filepath)){
+                unlink($filepath);
+            }
+        }
+
+        $this->barang_model->delete($kode_barang);
+
+        session()->setFlashdata('pesan', 'Produk berhasil didelete');
+
+        redirect()->route('admin_toko.barang_view');
+    }
 }
 
         // if (!$this->validate([
