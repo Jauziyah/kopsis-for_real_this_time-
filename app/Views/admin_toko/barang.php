@@ -48,7 +48,9 @@
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
 
-                    <button class="btn btn-warning" type="submit">Soft Delete</button>
+                    <button class="btn btn-warning">Soft Delete</button>
+                    <a class="btn btn-warning" href="<?= route_to('admin_toko.barang_update_view', $barang['kode_barang']);?>">Update</a>
+                    
                 </td>
 
                 </tr>

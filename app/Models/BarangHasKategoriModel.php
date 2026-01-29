@@ -12,4 +12,12 @@ class BarangHasKategoriModel extends Model
     // Dates
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+
+
+    public function getBarangKategori($kode_barang)
+    {
+        $result = $this->select('kategori_id_kategori')->where('barang_kode_barang', $kode_barang)->findAll();
+        return array_column($result, 'kategori_id_kategori');
+    }
+
 }

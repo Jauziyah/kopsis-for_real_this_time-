@@ -100,8 +100,86 @@ class AdminBarang_crudv extends BaseController
         return redirect()->route('admin_toko.barang_view');
     }
 
-    public function updateBarang()
+    public function updateBarangView($kode_barang)
     {
+        $barang = $this->barang_model->find($kode_barang);
+        $kategori_list = $this->kategori_model->findAll();
+        $barang_images = $this->barang_image_model->findBarangImage($kode_barang);
+        $selected_category = $this->barang_has_kategori_model->getBarangKategori($kode_barang);
+
+        $data = [
+            'barang' => $barang,
+            'kategori_list' => $kategori_list,
+            'selected_kategori' => $selected_category,
+            'barang_images' => $barang_images
+        ];
+
+        return view('admin_toko/update_barang', $data);
+    }
+
+    public function updateBarang($barang_code)
+    {
+        $this->barang_model->save([
+            'kode_barang' => $barang_code,
+            'nama_barang' => $this->request->getVar('nama_barang'),
+            'keterangan_barang' => $this->request->getVar('keterangan_barang'),
+            'harga_barang' => $this->request->getVar('harga_barang'),
+            'stok_barang' => (int) $this->request->getVar('stok_barang'),
+            'exp_barang' => $this->request->getVar('exp_barang'),
+            'status_ketersediaan' => $this->request->getVar('status_ketersediaan'),
+        ]);
+
+        $this->barang_has_kategori_model->where('barang_kode_barang', $barang_code)->delete();
+        $kategori_inputs = $this->request->getPost('kategori');
+
+        if(!empty($kategori_inputs)){
+            foreach($kategori_inputs as $kategori_id){
+                $this->barang_has_kategori_model->save([
+                    'barang_kode_barang' => $barang_code,
+                    'kategori_id_kategori'=> $kategori_id
+                ]);
+            }
+        }
+
+        $old_barang_images = $this->barang_image_model->where('barang_kode_barang', $barang_code)->findAll();
+
+        foreach($old_barang_images as $images){
+            $filepath = 'uploads/'.$images['nama_image'];
+            if(file_exists($filepath)){
+                unlink($filepath);
+            }
+        }
+
+        $barang_images = $this->request->getFileMultiple('barang_images');
+        $has_valid_image = false;
+
+        if(!empty($barang_images)){
+            foreach($barang_images as $image){
+                if($image->getError() !== UPLOAD_ERR_OK) continue;
+
+                $image_name = $image->getRandomName();
+                $image->move('uploads', $image_name);
+                $this->barang_image_model->save([
+                    'barang_kode_barang' => $barang_code,
+                    'nama_image' => $image_name,
+                    'created_at' => date('Y-m-d H:i:s')
+                ]);
+
+                $has_valid_image = true;
+            }
+        }
+
+        if (!$has_valid_image) {
+            $this->barang_image_model->save([
+                'barang_kode_barang' => $barang_code,
+                'nama_image' => 'default_produk.jpg',
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+        
+        session()->setFlashdata('pesan', 'produk berhasil diupdate');
+
+        return redirect()->route('admin_toko.barang_view');
     }
 
     public function deleteBarang($kode_barang)
@@ -120,6 +198,7 @@ class AdminBarang_crudv extends BaseController
 
         redirect()->route('admin_toko.barang_view');
     }
+
 }
 
         // if (!$this->validate([

@@ -26,8 +26,8 @@ $routes->group('admin_toko', ['filter' => 'admin_toko'], function($routes){
     $routes->get('barang', 'AdminBarang_crudv::index', ['as' => 'admin_toko.barang_view']); // Page View
     $routes->get('barang/create', 'AdminBarang_crudv::createView', ['as' => 'admin_toko.barang_create_view']); // Add Barang page view
     $routes->post('barang-create', 'AdminBarang_crudv::createBarang', ['as' => 'admin_toko.barang_create']); // Add Barang method
-
-
+    $routes->get('barang/update/(:any)', 'AdminBarang_crudv::updateBarangView/$1', ['as' => 'admin_toko.barang_update_view']); // Update Barang page view
+    $routes->post('barang-update/(:any)', 'AdminBarang_crudv::updateBarang/$1', ['as' => 'admin_toko.barang_update']); // Update Barang method
 
     // -------------------Kategori Seiks90j --------------------------------
     $routes->post('kategori/(:num)', 'AdminKategori_crudv::deleteBarang/$1', ['as' => 'admin_toko.kategori_delete']); // delete
