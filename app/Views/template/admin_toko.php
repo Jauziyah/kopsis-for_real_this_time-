@@ -16,7 +16,7 @@
 
     <h4><a href="<?= route_to('admin_toko.barang_view') ?>" class="nav-link text-white">Product</a></h4>
     <h4><a href="<?= route_to('admin_toko.kategori_view') ?>" class="nav-link text-white">Kategori</a></h4>
-    <h4><a href="" class="nav-link text-white">Etwas</a></h4>
+    <h4><a href="<?= route_to('admin_toko.transaksi_request_view');?>" class="nav-link text-white">Transaksi</a></h4>
     </nav>
     
     <div class="container-fluid">

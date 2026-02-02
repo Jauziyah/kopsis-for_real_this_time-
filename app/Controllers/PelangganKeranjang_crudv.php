@@ -57,10 +57,11 @@ public function addKeranjang()
         $newQty = $existingItem['jumlah_barang'] + $jumlah_barang;
         
         $this->barang_keranjang_model->save([
-            'produk_keranjang_id' => $existingItem['produk_keranjang_id'], 
+            'produk_keranjang_id' => $existingItem['produk_keranjang_id'], // Including ID forces an UPDATE
             'jumlah_barang' => $newQty
         ]);
     } else {
+        // INSERT new row
         $this->barang_keranjang_model->save([
             'barang_kode_barang'     => $kode_barang,
             'keranjang_keranjang_id' => $keranjang_id,
@@ -68,11 +69,10 @@ public function addKeranjang()
         ]);
     }
 
-    $data = [
-      'title' => 'etwas'  
-    ];
-    return view('pelanggan.main_view', $data);
+    return redirect()->back()->with('pesan', 'Item added to cart');
 }
 
 }
+
+
 ?>

@@ -53,4 +53,7 @@ $routes->group('pelanggan', ['filter' => 'pelanggan'], function($routes){
 
     $routes->get('keranjang', 'PelangganTransaksi::index', ['as' => 'pelanggan.transaksi_view']);
 
+    // Add Requets
+    $routes->post('add-request', 'PelangganTransaksi::addRequest', ['as' => 'pelanggan.add_request']);
+
 });
