@@ -21,6 +21,7 @@ $routes->post('register', 'RegisterAdd::registerAction' ,['as' => 'register.acti
 // Admin Toko
 $routes->group('admin_toko', ['filter' => 'admin_toko'], function($routes){ 
 
+
     // -------------------barang Seiks90j --------------------------------
     $routes->post('barang-delete/(:any)', 'AdminBarang_crudv::deleteBarang/$1', ['as' => 'admin_toko.barang_delete']); // Delete Barang 
     $routes->get('barang', 'AdminBarang_crudv::index', ['as' => 'admin_toko.barang_view']); // Page View
@@ -45,5 +46,11 @@ $routes->group('owner', ['filter' => 'owner'], function($routes){
 
 // Pelanggan
 $routes->group('pelanggan', ['filter' => 'pelanggan'], function($routes){
-    $routes->get('/', 'PelangganDisplayPage::index', ['as' => 'pelanggan.main_view']);
+    // -----Main View-----
+    $routes->get('/', 'PelangganKeranjang_crudv::index', ['as' => 'pelanggan.main_view']); //Main page view
+    // Add Keranjang
+    $routes->post('keranjang-add', 'PelangganKeranjang_crudv::addKeranjang', ['as' => 'pelanggan.add_keranjang']); // Add keranjang method 
+
+    $routes->get('keranjang', 'PelangganTransaksi::index', ['as' => 'pelanggan.transaksi_view']);
+
 });
