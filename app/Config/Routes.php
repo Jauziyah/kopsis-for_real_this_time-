@@ -37,6 +37,11 @@ $routes->group('admin_toko', ['filter' => 'admin_toko'], function($routes){
     $routes->post('add-kategori' , 'AdminKategori_crudv::save', ['as' => 'admin_toko.kategori_add']); //Add Kategori method
     $routes->get('kategori/update/(:num)', 'AdminKategori_crudv::updateView/$1', ['as' => 'admin_toko.kategori_update_view']);  // kategori update page
     $routes->post('kategori-update/(:num)', 'AdminKategori_crudv::update/$1', ['as' => 'admin_toko.kategori_update']); // kategori update method
+    // -------------------transaksi Seiks90j --------------------------------
+    $routes->get('transaksi', 'AdminTransaksi::index', ['as'=>'admin_toko.transaksi_request_view']);
+    $routes->get('transaksi/detail/(:any)', 'AdminTransaksi::detailTransaksi/$1', ['as' => 'admin_toko.detail_transaksi_view']); //Detail Transaksi
+    $routes->get('transaksi/detail-accept/(:any)', 'AdminTransaksi::acceptTransaction/$1', ['as'=> 'admin_toko.accept_transaction']);
+
 });
 
 // owner
@@ -55,5 +60,6 @@ $routes->group('pelanggan', ['filter' => 'pelanggan'], function($routes){
 
     // Add Requets
     $routes->post('add-request', 'PelangganTransaksi::addRequest', ['as' => 'pelanggan.add_request']);
+
 
 });

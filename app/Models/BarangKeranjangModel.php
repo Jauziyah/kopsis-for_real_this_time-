@@ -23,6 +23,8 @@ class BarangKeranjangModel extends Model
         return $result;
     }
 
+    
+
 }
 
 ?>
